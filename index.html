@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Burçak Bayram</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600&family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #fff7cc;
+      color: #000;
+      font-size: 16px;
+      display: flex;
+    }
+
+    .sidebar {
+      width: 260px;
+      background-color: #fff7cc;
+      padding: 2rem 2rem 2rem 2rem;
+      margin-left: 2rem;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 16px;
+    }
+
+    .sidebar img {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 1rem;
+    }
+
+    .sidebar h1 {
+      font-family: 'Inter', sans-serif;
+      font-size: 24px;
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+    }
+
+    .sidebar nav a {
+      display: block;
+      margin: 0.5rem 0;
+      color: #3366cc;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .sidebar nav a .emoji {
+      color: #3366cc;
+    }
+
+    .content {
+      flex-grow: 1;
+      padding: 2rem;
+      max-width: 800px;
+    }
+
+    /* Main portfolio sections */
+    .main-content {
+      display: block;
+    }
+
+    .project-detail {
+      display: none;
+    }
+
+    section {
+      margin-bottom: 2rem;
+    }
+
+    section:not(:last-of-type)::after {
+      content: "";
+      display: block;
+      border-top: 1px solid #ddd;
+      margin: 2rem 0;
+    }
+
+    h3 {
+      font-family: 'Times New Roman', serif;
+      font-weight: 600;
+      color: #000;
+      margin-top: 0;
+    }
+
+    p {
+      font-family: 'Times New Roman', serif;
+      font-weight: 400;
+      line-height: 1.6;
+    }
+
+    .content ul {
+      font-family: 'Times New Roman', serif;
+    }
+
+    .content a {
+      font-family: 'Times New Roman', serif;
+    }
+
+    /* Project styling */
+    .project {
+      margin-bottom: 2rem;
+      padding: 1rem 0;
+    }
+
+    .project a {
+      font-family: 'Times New Roman', serif;
+      transition: all 0.3s ease;
+    }
+
+    .project a:hover {
+      text-decoration: underline;
+    }
+
+    .project a:hover div {
+      text-decoration: underline;
+    }
+
+    .project img {
+      max-width: 100%;
+      border: 1px solid #ccc;
+      margin-top: 0.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .project img:hover {
+      border-color: #e25d44;
+      transform: scale(1.02);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    ul {
+      padding-left: 1rem;
+    }
+
+    /* Project detail page styles - A4 format */
+    .project-detail {
+      display: none;
+      max-width: 210mm; /* A4 width */
+      margin: 0 auto;
+      padding: 25mm; /* A4 margins */
+      background-color: #fff7cc;
+      font-family: 'Times New Roman', serif;
+      font-size: 12pt;
+      line-height: 1.5;
+    }
+
+    .back-link {
+      font-family: 'Inter', sans-serif;
+      color: #3366cc;
+      text-decoration: none;
+      font-weight: 600;
+      margin-bottom: 20mm;
+      display: inline-block;
+      cursor: pointer;
+      font-size: 11pt;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    .project-detail h1 {
+      font-family: 'Times New Roman', serif;
+      font-size: 16pt;
+      font-weight: bold;
+      margin-bottom: 15mm;
+      text-align: left;
+      color: #000;
+    }
+
+    .project-description {
+      margin-bottom: 15mm;
+      text-align: left;
+    }
+
+    .downloads {
+      display: flex;
+      gap: 10mm;
+      margin: 15mm 0;
+      justify-content: center;
+    }
+
+    .download-btn {
+      text-decoration: none;
+      border: 1pt solid #e25d44;
+      padding: 5mm 10mm;
+      border-radius: 3pt;
+      color: #e25d44;
+      font-weight: 600;
+      font-size: 10pt;
+      transition: all 0.3s ease;
+    }
+
+    .download-btn:hover {
+      background-color: #e25d44;
+      color: white;
+    }
+
+    .download-btn.secondary {
+      border-color: #3366cc;
+      color: #3366cc;
+    }
+
+    .download-btn.secondary:hover {
+      background-color: #3366cc;
+      color: white;
+    }
+
+    .features {
+      margin: 15mm 0;
+    }
+
+    .features h3 {
+      font-family: 'Times New Roman', serif;
+      font-weight: bold;
+      font-size: 14pt;
+      margin-bottom: 5mm;
+    }
+
+    .tech-stack {
+      background-color: #f9f9f9;
+      padding: 5mm;
+      border: 1pt solid #ddd;
+      margin: 10mm 0;
+      font-size: 11pt;
+    }
+
+    .images-grid {
+      display: flex;
+      gap: 20mm;
+      margin: 20mm 0;
+      justify-content: space-between;
+    }
+
+    .image-section {
+      text-align: center;
+      flex: 1;
+    }
+
+    .image-section img {
+      max-width: 100%;
+      height: auto;
+      border: 0.5pt solid #ddd;
+      margin-bottom: 3mm;
+    }
+
+    .image-caption {
+      font-style: italic;
+      color: #666;
+      font-size: 10pt;
+      margin-bottom: 8mm;
+    }
+
+    /* Bentham specific styles */
+    .bentham-container {
+      text-align: center;
+      margin: 10mm 0;
+    }
+
+    .color-checker-center {
+      text-align: center;
+      margin-bottom: 10mm;
+    }
+
+    .color-checker-center img {
+      width: auto;
+      height: auto;
+      max-width: 100%;
+    }
+
+    .color-checker-center p {
+      font-size: 11pt;
+      margin: 5mm 0;
+      font-weight: bold;
+      color: #e25d44;
+    }
+
+    .bentham-photos-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 5mm;
+      margin: 0;
+    }
+
+    .bentham-photo {
+      text-align: center;
+    }
+
+    .bentham-photo img {
+      width: 100%;
+      height: auto;
+      border: 0.5pt solid #ddd;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .bentham-photo img:hover {
+      border-color: #e25d44;
+      transform: scale(1.2);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      z-index: 100;
+      position: relative;
+    }
+
+    /* Modal styles for image zoom */
+    .image-modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      max-width: 90%;
+      max-height: 90%;
+      border: 2px solid #fff;
+      border-radius: 5px;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: #fff;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 1001;
+    }
+
+    .close-modal:hover {
+      color: #e25d44;
+    }
+
+    /* Blue Plaques specific styles */
+    .blue-plaques-page {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #fff7cc;
+      z-index: 2000;
+      display: none;
+    }
+
+    .blue-plaques-back-btn {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      z-index: 2001;
+      background: #fff7cc;
+      padding: 10px 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      text-decoration: none;
+      color: #3366cc;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      cursor: pointer;
+    }
+
+    .blue-plaques-back-btn:hover {
+      background: #3366cc;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <img src="profile.jpg" alt="Burçak Bayram">
+    <h1>🌾 Burçak Bayram 🌾</h1>
+    <p style="font-size: 14px; color: #666; margin-bottom: 0.5rem; font-style: italic;">/ˈbuɾ.t͡ʃak/</p>
+    <p style="font-size: 12px; color: #999; margin-bottom: 1.5rem;">*Yes, my name does have an emoji :)</p>
+    <nav>
+      <a href="#about" onclick="showMain()">About</a>
+      <a href="#projects" onclick="showMain()">Projects</a>
+      <a href="#talks" onclick="showMain()">Talks & Workshops</a>
+      <a href="#inspirations" onclick="showMain()">Inspirations</a>
+      <a href="#paintings" onclick="showMain()">Paintings</a>
+      <a href="mailto:burcak.bayram.23@alumni.ucl.ac.uk">Email Me <span class="emoji">✉️</span></a>
+      <a href="https://www.linkedin.com/in/burcak-bayram-249b4b256/" target="_blank">LinkedIn <span class="emoji">💼</span></a>
+    </nav>
+  </div>
+
+  <div class="content">
+    <!-- Main Portfolio Content -->
+    <div id="main-content" class="main-content">
+      <section id="about" style="margin-top: 2rem;">
+        <p>Welcome! I'm a recent graduate of UCL's Master's in Digital Humanities. While writing my thesis, I began working on an interactive map visualizing Constantine Cavafy's Alexandria, a project I'm still developing.</p>
+        <p>At the moment, I'm debugging a historical map alignment issue with support from the David Rumsey Map Collection at Stanford and can't wait to make the project public soon!</p>
+        <hr style="border: none; border-top: 1px solid #ddd; margin: 1.5rem 0;">
+        <p>I've always been fascinated by languages, not just as structured systems, but as <em>lalangue</em> in the Lacanian sense.</p>
+        <p>These days, I find similar questions in technology and algorithms, and how they shape how we speak, move, and think.</p>
+      </section>
+
+      <section id="projects">
+        <div class="project">
+          <h3><span style="color: #e25d44;">■</span> NLP</h3>
+          
+          <div style="display: flex; gap: 1.5rem; margin: 1rem 0; align-items: flex-start; justify-content: center; max-width: none;">
+            <div style="width: 400px;">
+              <img src="sent-chart-preview.jpg" alt="Character frequency analysis" style="width: 100%; height: auto; border: 1px solid #ddd; border-radius: 5px; cursor: pointer;" onclick="showNLPDetail()">
+            </div>
+            <div style="width: 400px;">
+              <img src="sent-analysis-tressillian.jpg" alt="Tressilian sentiment analysis" style="width: 100%; height: auto; border: 1px solid #ddd; border-radius: 5px; cursor: pointer;" onclick="showNLPDetail()">
+            </div>
+            <div style="width: 400px;">
+              <img src="sent-analysis-elizabeth.jpg" alt="Elizabeth sentiment analysis" style="width: 100%; height: auto; border: 1px solid #ddd; border-radius: 5px; cursor: pointer;" onclick="showNLPDetail()">
+            </div>
+          </div>
+          
+          <div style="text-align: center; margin-top: 0.5rem;">
+            <a href="#" onclick="showNLPDetail()" style="color: #000; text-decoration: none;">
+              <div style="font-weight: bold; margin-bottom: 0.25rem;">Sentiment Analysis of Kenilworth by Sir Walter Scott</div>
+              <div style="font-weight: normal; font-size: 0.9rem; color: #666;">Natural language processing project analyzing character sentiment in a literary work</div>
+            </a>
+          </div>
+        </div>
+
+        <div class="project">
+          <h3><span style="color: #e25d44;">■</span> Digitization</h3>
+          
+          <div style="display: flex; gap: 1.5rem; margin: 1rem 0; align-items: flex-start; justify-content: flex-start;">
+            <div style="width: 280px;">
+              <img src="matruska-pic.jpg" alt="Matryoshka doll digitisation project" style="width: 100%; height: auto; border: 1px solid #ddd; border-radius: 5px; cursor: pointer;" onclick="showMatryoshkaDetail()">
+              <div style="text-align: left; margin-top: 0.5rem;">
+                <a href="#" onclick="showMatryoshkaDetail()" style="color: #000; text-decoration: none;">
+                  <div style="font-weight: bold; margin-bottom: 0.25rem;">"Everything Not Saved Will Be Lost": A Digitisation Project of a Matryoshka Doll</div>
+                  <div style="font-weight: normal; font-size: 0.9rem; color: #666;">Digitising a wooden Matryoshka doll comparing the results of 3DF Zephyr vs Polycam</div>
+                </a>
+              </div>
+            </div>
+            <div style="width: 280px;">
+              <img src="k1.jpg" alt="Kaskie plushie digitisation project" style="width: 100%; height: auto; border: 1px solid #ddd; border-radius: 5px; cursor: pointer;" onclick="showKaskieDetail()">
+              <div style="text-align: left; margin-top: 0.5rem;">
+                <a href="#" onclick="showKaskieDetail()" style="color: #000; text-decoration: none;">
+                  <div style="font-weight: bold; margin-bottom: 0.25rem;">A Case of Textile: Walk-around Technique in the UCL Digitisation Suite with a Plushie named Kaskie 🦈</div>
+                  <div style="font-weight: normal; font-size: 0.9rem; color: #666;">Exploring textile digitization techniques using walk-around photography methods</div>
+                </a>
+              </div>
+            </div>
+            <div style="width: 280px;">
+              <img src="b1.jpg" alt="Bentham Collections digitisation project" style="width: 100%; height: auto; border: 1px solid #ddd; border-radius: 5px; cursor: pointer;" onclick="showBenthamDetail()">
+              <div style="text-align: left; margin-top: 0.5rem;">
+                <a href="#" onclick="showBenthamDetail()" style="color: #000; text-decoration: none;">
+                  <div style="font-weight: bold; margin-bottom: 0.25rem;">Bentham Collections: Flat-Copy Digitisation & OCR/HTR</div>
+                  <div style="font-weight: normal; font-size: 0.9rem; color: #666;">Historical document digitisation and optical text recognition workflows</div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="project">
+          <h3><span style="color: #e25d44;">■</span> Data Visualisation & GIS</h3>
+          
+          <div style="display: flex; gap: 1.5rem; margin: 1rem 0; align-items: flex-start; justify-content: flex-start;">
+            <div style="width: 150px;">
+              <img src="v1.png" alt="London Blue Plaques Visualization 1" style="width: 100%; height: auto; border: 1px solid #ddd; border-radius: 5px; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.2)'; this.style.borderColor='#e25d44'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.2)'; this.style.zIndex='100'; this.style.position='relative';" onmouseout="this.style.transform='scale(1)'; this.style.borderColor='#ddd'; this.style.boxShadow='none'; this.style.zIndex='auto'; this.style.position='static';" onclick="showBluePlaquesDetail()">
+            </div>
+            <div style="width: 150px;">
+              <img src="v2.png" alt="London Blue Plaques Visualization 2" style="width: 100%; height: auto; border: 1px solid #ddd; border-radius: 5px; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.2)'; this.style.borderColor='#e25d44'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.2)'; this.style.zIndex='100'; this.style.position='relative';" onmouseout="this.style.transform='scale(1)'; this.style.borderColor='#ddd'; this.style.boxShadow='none'; this.style.zIndex='auto'; this.style.position='static';" onclick="showBluePlaquesDetail()">
+            </div>
+            <div style="width: 150px;">
+              <img src="v3.png" alt="London Blue Plaques Visualization 3" style="width: 100%; height: auto; border: 1px solid #ddd; border-radius: 5px; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.2)'; this.style.borderColor='#e25d44'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.2)'; this.style.zIndex='100'; this.style.position='relative';" onmouseout="this.style.transform='scale(1)'; this.style.borderColor='#ddd'; this.style.boxShadow='none'; this.style.zIndex='auto'; this.style.position='static';" onclick="showBluePlaquesDetail()">
+            </div>
+            <div style="width: 250px;">
+              <img src="gis.png" alt="Mapping Constantine Cavafy's Alexandria" style="width: 100%; height: auto; border: 1px solid #ddd; border-radius: 5px; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.2)'; this.style.borderColor='#e25d44'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.2)'; this.style.zIndex='100'; this.style.position='relative';" onmouseout="this.style.transform='scale(1)'; this.style.borderColor='#ddd'; this.style.boxShadow='none'; this.style.zIndex='auto'; this.style.position='static';" onclick="showCavafyDetail()">
+            </div>
+          </div>
+          
+          <div style="display: flex; gap: 1.5rem; margin-top: 0.5rem; align-items: flex-start;">
+            <div style="width: 495px;">
+              <a href="#" onclick="showBluePlaquesDetail()" style="color: #000; text-decoration: none;">
+                <div style="font-weight: bold; margin-bottom: 0.25rem;">Visualizing the Gender Distribution of London's Blue Plaques</div>
+                <div style="font-weight: normal; font-size: 0.9rem; color: #666;">Data visualization exploring gender representation in London's commemorative blue plaques</div>
+              </a>
+            </div>
+            <div style="width: 250px;">
+              <a href="#" onclick="showCavafyDetail()" style="color: #000; text-decoration: none;">
+                <div style="font-weight: bold; margin-bottom: 0.25rem;">Mapping Constantine Cavafy's Alexandria</div>
+                <div style="font-weight: normal; font-size: 0.9rem; color: #666;">GIS mapping project exploring the geographical references in Cavafy's poetry</div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="talks">
+        <div class="project">
+          <h3><span style="color: #e25d44;">■</span> London Data Week 2024 — Civic Data & Cybersecurity Workshop</h3>
+          
+          <div style="display: flex; gap: 1.5rem; margin: 1rem 0; align-items: flex-start; justify-content: flex-start;">
+            <div style="width: 280px;">
+              <img src="LDW_GC.jpeg" alt="London Data Week 2024 Workshop" style="width: 100%; height: auto; border: 1px solid #ddd; border-radius: 5px; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.2)'; this.style.borderColor='#e25d44'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.2)'; this.style.zIndex='100'; this.style.position='relative';" onmouseout="this.style.transform='scale(1)'; this.style.borderColor='#ddd'; this.style.boxShadow='none'; this.style.zIndex='auto'; this.style.position='static';" onclick="showLDWDetail()">
+              <div style="text-align: left; margin-top: 0.5rem;">
+                <a href="#" onclick="showLDWDetail()" style="color: #000; text-decoration: none;">
+                  <div style="font-weight: bold; margin-bottom: 0.25rem;">London Data Week 2024 — Civic Data & Cybersecurity Workshop</div>
+                  <div style="font-weight: normal; font-size: 0.9rem; color: #666;">Public workshop and mini-hackathon exploring civic data and cybersecurity</div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="inspirations">
+        <h3><span style="color: #e25d44;">■</span> Inspirations</h3>
+        <ul>
+          <li><a href="https://www.paulgraham.com/articles.html" target="_blank">Essays by Paul Graham</a></li>
+          <li><a href="https://substack.com/@slavojzizek/posts" target="_blank">Slavoj Žižek's Writings</a></li>
+          <li><a href="https://zizekanalysis.wordpress.com/" target="_blank">Žižek-Lacan-Freud!</a></li>
+          <li><a href="https://www.edwardtufte.com/" target="_blank">Edward Tufte</a></li>
+          <li><a href="https://www.dear-data.com/theproject" target="_blank">Dear Data Project</a></li>
+          <li><a href="https://web.stanford.edu/~jurafsky/slp3/" target="_blank">Speech and Language Processing by Jurafsky & Martin</a></li>
+        </ul>
+      </section>
+
+      <section id="paintings">
+        <h3><span style="color: #e25d44;">■</span> Paintings</h3>
+        <p>Coming soon: My paintings produced while I was part of the Moda127 Art Studio based in Istanbul</p>
+      </section>
+    </div>
+
+    <!-- NLP Project Detail Page -->
+    <div id="nlp-detail" class="project-detail">
+      <a href="#" onclick="showMain()" class="back-link">← Back to Portfolio</a>
+      
+      <h1>Sentiment Analysis of Kenilworth by Sir Walter Scott</h1>
+      
+      <div class="project-description">
+        <p>This report presents the results of a text mining project focusing on Kenilworth, a novel by Sir Walter Scott which is free to access on Project Gutenberg. The primary goal is to identify up to two key characters from the text and analyse the sentiment of the discussions surrounding these characters, namely Tressillian and Queen Elizabeth, which are then visualized via two respective plots for each character. Through a systematic approach using various natural language processing (NLP) tools, this report will demonstrate how characters are portrayed and how their narrative contexts influence the sentiment of textual mentions.</p>
+      </div>
+
+      <div class="downloads">
+        <a href="23223014-INST0073-2.pdf" target="_blank" class="download-btn">
+          📄 View Full Report (PDF)
+        </a>
+        <a href="23223014_INST0073_.ipynb - Colab.pdf" target="_blank" class="download-btn secondary">
+          📓 View Jupyter Notebook (PDF)
+        </a>
+      </div>
+
+      <div class="tech-stack">
+        <strong>Technologies Used:</strong> Python, spaCy, NLTK, TextBlob, Matplotlib, Pandas
+      </div>
+
+      <div class="images-grid">
+        <div class="image-section">
+          <img src="sent-chart-preview.jpg" alt="Character frequency analysis" style="width: 100%; height: auto; border: 0.5pt solid #ddd; margin-bottom: 3mm; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.2)'; this.style.borderColor='#e25d44'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.2)'; this.style.zIndex='100'; this.style.position='relative';" onmouseout="this.style.transform='scale(1)'; this.style.borderColor='#ddd'; this.style.boxShadow='none'; this.style.zIndex='auto'; this.style.position='static';" onclick="openImageModal(this.src, this.alt)">
+          <div class="image-caption">Character frequency analysis showing top 10 characters by mention count</div>
+        </div>
+        
+        <div class="image-section">
+          <img src="sent-analysis-tressillian.jpg" alt="Tressilian sentiment analysis" style="width: 100%; height: auto; border: 0.5pt solid #ddd; margin-bottom: 3mm; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.2)'; this.style.borderColor='#e25d44'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.2)'; this.style.zIndex='100'; this.style.position='relative';" onmouseout="this.style.transform='scale(1)'; this.style.borderColor='#ddd'; this.style.boxShadow='none'; this.style.zIndex='auto'; this.style.position='static';" onclick="openImageModal(this.src, this.alt)">
+          <div class="image-caption">Sentiment analysis over text for Tressilian character</div>
+        </div>
+        
+        <div class="image-section">
+          <img src="sent-analysis-elizabeth.jpg" alt="Queen Elizabeth sentiment analysis" style="width: 100%; height: auto; border: 0.5pt solid #ddd; margin-bottom: 3mm; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.2)'; this.style.borderColor='#e25d44'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.2)'; this.style.zIndex='100'; this.style.position='relative';" onmouseout="this.style.transform='scale(1)'; this.style.borderColor='#ddd'; this.style.boxShadow='none'; this.style.zIndex='auto'; this.style.position='static';" onclick="openImageModal(this.src, this.alt)">
+          <div class="image-caption">Sentiment analysis over text for Queen Elizabeth character</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Matryoshka Project Detail Page -->
+    <div id="matryoshka-detail" class="project-detail">
+      <a href="#" onclick="showMain()" class="back-link">← Back to Portfolio</a>
+      
+      <h1 style="font-size: 14pt; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">💽 🪆 "Everything Not Saved Will Be Lost": A Digitisation Project of a Matryoshka Doll</h1>
+      
+      <div class="project-description">
+        <p>In our photogrammetry project, we focused on two different methods for digitising a wooden Matryoshka doll comparing the results of two different soft wares namely 3DF Zephyr and Polycam App: the first a scientific lab-based method, the latter a more accessible method by anyone with a smartphone. The objective was to assess the extent of information loss when using simpler equipment to digitize items in comparison with results from high-tech lab-based photogrammetry practice.</p>
+        
+        <p>We used the 3DF Zephyr method for capturing high-quality and detailed images from various and measured angles at the Digitisation Suite at the UCL. The use of professional setting at the Suite, leveraged and optimised the reconstruction of the item producing a detailed and accurate digital representation of the Matryoshka doll.</p>
+        
+        <p>The second method explored the Polycam App which is an accessible and user-friendly application and can be used for crowdsourcing purposes for the preservation of cultural heritage. This method focused on evaluating the loss of information that comes with generating a 3D model on the app and how it might affect the research and the long-term preservation of the item.</p>
+        
+        <p>Our main findings present the trade-offs between a more scientific approach and mass produced more accessible results of the digitisation processes. We discuss in our group report how researchers or creators can use the two methods to tailor their approach regarding the purpose of their digitisation, financial viability, and sustainability. During our digitisation research, we discussed the capabilities and limitations of these different software solutions and how they made photogrammetry more accessible by democratizing it.</p>
+      </div>
+
+      <div style="display: flex; gap: 15mm; margin: 5mm 0; align-items: flex-start;">
+        <div style="flex: 1;">
+          <h4 style="font-size: 12pt; margin-bottom: 5mm; min-height: 16pt;">3DF Zephyr Result (UCL Digitisation Suite)</h4>
+          <div class="sketchfab-embed-wrapper">
+            <iframe title="Matryoshka - 3D Zephyr" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/df7f4885291b4594b369abaa45e7c4f4/embed" style="width: 100%; height: 250px;"></iframe>
+            <p style="font-size: 9pt; font-weight: normal; margin: 3mm 0 0 0; color: #4A4A4A;">
+              <a href="https://sketchfab.com/3d-models/matryoshka-3d-zephyr-df7f4885291b4594b369abaa45e7c4f4?utm_medium=embed&utm_campaign=share-popup&utm_content=df7f4885291b4594b369abaa45e7c4f4" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">Matryoshka - 3D Zephyr</a> by <a href="https://sketchfab.com/ljwhurst?utm_medium=embed&utm_campaign=share-popup&utm_content=df7f4885291b4594b369abaa45e7c4f4" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">ljwhurst</a> on <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=df7f4885291b4594b369abaa45e7c4f4" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">Sketchfab</a>
+            </p>
+          </div>
+        </div>
+
+        <div style="flex: 1;">
+          <h4 style="font-size: 12pt; margin-bottom: 5mm; min-height: 16pt;">Polycam Result</h4>
+          <video controls style="width: 100%; height: 250px; border: 0.5pt solid #ddd;">
+            <source src="polycam.MP4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+
+      <div style="margin: 15mm 0; text-align: center;">
+        <img src="group.jpg" alt="Groups A and B at work :)" style="max-width: 70%; height: auto; border: 0.5pt solid #ddd; border-radius: 5px;">
+        <p style="font-style: italic; color: #666; font-size: 10pt; margin-top: 3mm;">Groups A and B at work at the UCL Digitisation Suite/Imaging Lab</p>
+      </div>
+    </div>
+
+    <!-- Kaskie Project Detail Page -->
+    <div id="kaskie-detail" class="project-detail">
+      <a href="#" onclick="showMain()" class="back-link">← Back to Portfolio</a>
+      
+      <h1 style="font-size: 14pt;">🧸 🦈 A Case of Textile: Walk-around Technique in the UCL Digitisation Suite with a Plushie named Kaskie</h1>
+      
+      <div class="project-description">
+        <p>Intrigued by the challenges of capturing textiles, a notoriously difficult material in cultural heritage preservation, I brought in an unlikely test subject to the UCL Digitisation Suite: my plushie, Kaskie.</p>
+        
+        <p>Setting up the shoot was trickier than expected. Kaskie refused to stay upright (wedges only got me so far), and I spent a good amount of time adjusting camera settings like shutter speed and lighting angles. I carried out the entire shoot using Capture One, a professional image capture and editing software, and applied a colour management workflow- including the use of a colour checker for accurate calibration.</p>
+        
+        <p>Even with these techniques- colour correction applied to every image, professional lighting, and careful setup- it was still difficult to capture the full intricacy of the textile's texture and depth. This experiment showed just how persistent information loss can be in the digitization of fabrics, even under ideal lab conditions.</p>
+        
+        <p>What began as a playful test with Kaskie became a meaningful exploration of the limits of digital reproduction and the complexity of preserving material presence through images.</p>
+        
+        <p><em>*Note: For display purposes, the original high-resolution TIFF files have been converted to JPEG.*</em></p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10mm; margin: 10mm 0;">
+        <div style="text-align: center;">
+          <img src="k1.jpg" alt="Kaskie textile digitization - Image 1" style="width: 100%; height: auto; border: 0.5pt solid #ddd; border-radius: 5px; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.2)'; this.style.borderColor='#e25d44'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.2)'; this.style.zIndex='100'; this.style.position='relative';" onmouseout="this.style.transform='scale(1)'; this.style.borderColor='#ddd'; this.style.boxShadow='none'; this.style.zIndex='auto'; this.style.position='static';" onclick="openImageModal(this.src, this.alt)">
+          <p style="font-size: 10pt; margin: 3mm 0; color: #666;">Image 1</p>
+        </div>
+        <div style="text-align: center;">
+          <img src="k2.jpg" alt="Kaskie textile digitization - Image 2" style="width: 100%; height: auto; border: 0.5pt solid #ddd; border-radius: 5px; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.2)'; this.style.borderColor='#e25d44'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.2)'; this.style.zIndex='100'; this.style.position='relative';" onmouseout="this.style.transform='scale(1)'; this.style.borderColor='#ddd'; this.style.boxShadow='none'; this.style.zIndex='auto'; this.style.position='static';" onclick="openImageModal(this.src, this.alt)">
+          <p style="font-size: 10pt; margin: 3mm 0; color: #666;">Image 2</p>
+        </div>
+        <div style="text-align: center;">
+          <img src="k3.jpg" alt="Kaskie textile digitization - Image 3" style="width: 100%; height: auto; border: 0.5pt solid #ddd; border-radius: 5px; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.2)'; this.style.borderColor='#e25d44'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.2)'; this.style.zIndex='100'; this.style.position='relative';" onmouseout="this.style.transform='scale(1)'; this.style.borderColor='#ddd'; this.style.boxShadow='none'; this.style.zIndex='auto'; this.style.position='static';" onclick="openImageModal(this.src, this.alt)">
+          <p style="font-size: 10pt; margin: 3mm 0; color: #666;">Image 3</p>
+        </div>
+        <div style="text-align: center;">
+          <img src="k4.jpg" alt="Kaskie textile digitization - Image 4" style="width: 100%; height: auto; border: 0.5pt solid #ddd; border-radius: 5px; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.2)'; this.style.borderColor='#e25d44'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.2)'; this.style.zIndex='100'; this.style.position='relative';" onmouseout="this.style.transform='scale(1)'; this.style.borderColor='#ddd'; this.style.boxShadow='none'; this.style.zIndex='auto'; this.style.position='static';" onclick="openImageModal(this.src, this.alt)">
+          <p style="font-size: 10pt; margin: 3mm 0; color: #666;">Image 4</p>
+        </div>
+        <div style="text-align: center;">
+          <img src="k5.jpg" alt="Kaskie textile digitization - Image 5" style="width: 100%; height: auto; border: 0.5pt solid #ddd; border-radius: 5px; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.2)'; this.style.borderColor='#e25d44'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.2)'; this.style.zIndex='100'; this.style.position='relative';" onmouseout="this.style.transform='scale(1)'; this.style.borderColor='#ddd'; this.style.boxShadow='none'; this.style.zIndex='auto'; this.style.position='static';" onclick="openImageModal(this.src, this.alt)">
+          <p style="font-size: 10pt; margin: 3mm 0; color: #666;">Image 5</p>
+        </div>
+        <div style="text-align: center;">
+          <img src="k6.jpg" alt="Kaskie textile digitization - Image 6" style="width: 100%; height: auto; border: 0.5pt solid #ddd; border-radius: 5px; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.2)'; this.style.borderColor='#e25d44'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.2)'; this.style.zIndex='100'; this.style.position='relative';" onmouseout="this.style.transform='scale(1)'; this.style.borderColor='#ddd'; this.style.boxShadow='none'; this.style.zIndex='auto'; this.style.position='static';" onclick="openImageModal(this.src, this.alt)">
+          <p style="font-size: 10pt; margin: 3mm 0; color: #666;">Image 6</p>
+        </div>
+        <div style="text-align: center;">
+          <img src="k7.jpg" alt="Kaskie textile digitization - Image 7" style="width: 100%; height: auto; border: 0.5pt solid #ddd; border-radius: 5px; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.2)'; this.style.borderColor='#e25d44'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.2)'; this.style.zIndex='100'; this.style.position='relative';" onmouseout="this.style.transform='scale(1)'; this.style.borderColor='#ddd'; this.style.boxShadow='none'; this.style.zIndex='auto'; this.style.position='static';" onclick="openImageModal(this.src, this.alt)">
+          <p style="font-size: 10pt; margin: 3mm 0; color: #666;">Image 7</p>
+        </div>
+        <div style="text-align: center;">
+          <img src="k8.jpg" alt="Kaskie textile digitization - Image 8" style="width: 100%; height: auto; border: 0.5pt solid #ddd; border-radius: 5px; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.2)'; this.style.borderColor='#e25d44'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.2)'; this.style.zIndex='100'; this.style.position='relative';" onmouseout="this.style.transform='scale(1)'; this.style.borderColor='#ddd'; this.style.boxShadow='none'; this.style.zIndex='auto'; this.style.position='static';" onclick="openImageModal(this.src, this.alt)">
+          <p style="font-size: 10pt; margin: 3mm 0; color: #666;">Image 8</p>
+        </div>
+        <div style="text-align: center;">
+          <img src="k9.jpg" alt="Kaskie textile digitization - Image 9" style="width: 100%; height: auto; border: 0.5pt solid #ddd; border-radius: 5px; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.2)'; this.style.borderColor='#e25d44'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.2)'; this.style.zIndex='100'; this.style.position='relative';" onmouseout="this.style.transform='scale(1)'; this.style.borderColor='#ddd'; this.style.boxShadow='none'; this.style.zIndex='auto'; this.style.position='static';" onclick="openImageModal(this.src, this.alt)">
+          <p style="font-size: 10pt; margin: 3mm 0; color: #666;">Image 9</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bentham Project Detail Page -->
+    <div id="bentham-detail" class="project-detail">
+      <a href="#" onclick="showMain()" class="back-link">← Back to Portfolio</a>
+      
+      <h1 style="font-size: 14pt;">📄 🔍 Bentham Collections: Flat-Copy Digitisation & OCR/HTR</h1>
+      
+      <div class="project-description">
+        <p>I had the opportunity to work directly with UCL Special Collections, focusing on the digitization of archival material from the Jeremy Bentham Manuscripts Collection. Our group project involved digitizing two historical Bentham handlists under controlled conditions using a flat-copy digitization workflow. These included:</p>
+        <ul>
+          <li>Report on the Bentham MSS with Catalogue (c.1892) by Thomas Whittaker</li>
+          <li><em>Catalogue of the Manuscripts of Jeremy Bentham</em> (1962) by Alexander Taylor Milne</li>
+        </ul>
+        
+        <p>To ensure the integrity and accuracy of the digitization, we followed UCL's formal protocols for object handling, file naming conventions, and metadata standards, as outlined in official internal guides. All photographs were captured using Capture One in a tethered setup, with consistent use of colour correction tools, including a colour checker, to calibrate the imaging process. Each page was photographed individually under optimal lighting and camera settings not to damage the manuscript with extra light exposure.</p>
+        
+        <p>We also discussed HDR imaging and integrated OCR techniques using Transkribus to improve text recognition, paving the way for searchable digital archives. These efforts enhance accessibility, allowing researchers to perform keyword searches and computational analysis across archival texts.</p>
+        
+        <p>Due to archival and institutional constraints, only a small selection of sample images is shown here for demonstrative purposes.</p>
+        
+        <p><em>*Note: Display images on this page were converted from high-resolution TIFF to JPEG for web presentation.*</em></p>
+      </div>
+
+      <!-- Color Checker in Center -->
+      <div class="bentham-container">
+        <div class="color-checker-center">
+          <img src="color_checker_3_4.jpg" alt="Color Checker for Calibration">
+          <p>Color Checker for Calibration</p>
+        </div>
+      </div>
+
+      <!-- Bentham Photos Grid -->
+      <div class="bentham-photos-grid">
+        <div class="bentham-photo">
+          <img src="b1.jpg" alt="Bentham Document 1" onclick="openImageModal(this.src, this.alt)">
+          <p>Document 1</p>
+        </div>
+        <div class="bentham-photo">
+          <img src="b2.jpg" alt="Bentham Document 2" onclick="openImageModal(this.src, this.alt)">
+          <p>Document 2</p>
+        </div>
+        <div class="bentham-photo">
+          <img src="b4.jpg" alt="Bentham Document 3" onclick="openImageModal(this.src, this.alt)">
+          <p>Document 3</p>
+        </div>
+        <div class="bentham-photo">
+          <img src="b5.jpg" alt="Bentham Document 4" onclick="openImageModal(this.src, this.alt)">
+          <p>Document 4</p>
+        </div>
+      </div>
+      
+      <p style="font-style: italic; color: #666; font-size: 10pt; margin-top: 5mm; text-align: center;">*Note: Display images on this page were converted from high-resolution TIFF to JPEG for web presentation.*</p>
+    </div>
+
+    <!-- Blue Plaques Data Visualization Detail Page -->
+    <div id="blue-plaques-detail" class="blue-plaques-page">
+      <a href="#" onclick="showMain()" class="blue-plaques-back-btn">← Back to Portfolio</a>
+      <iframe src="vizdata.html" style="width: 100%; height: 100%; border: none;" title="Visualizing the Gender Distribution of London's Blue Plaques"></iframe>
+    </div>
+
+    <!-- Cavafy GIS Project Detail Page -->
+    <div id="cavafy-detail" class="project-detail">
+      <a href="#" onclick="showMain()" class="back-link">← Back to Portfolio</a>
+      
+      <h1 style="font-size: 14pt;">🗺️ 🐉 Mapping Constantine Cavafy's Alexandria</h1>
+      
+      <div class="project-description">
+        <div class="thesis-quote">
+          <p>In The Poetics of Space, Gaston Bachelard (1969) discusses the power of the poetic image, emphasizing that its meaning is often grasped intuitively rather than through rational interpretation. This notion of poetic space is juxtaposed with Barbara Piatti's concept of 'geospace,' which differentiates the tangible, mappable world from the imagined landscapes of literature (2008, p.22-23). Constantine Cavafy's poetry embodies this interplay between physical and imagined spaces, making his work a compelling case study for exploring the application of GIS to literary mapping. Through this project, I investigate how Alexandria, the city that shaped Cavafy's poetry, translates into digital cartography, and how GIS technologies can be leveraged to visualise poetic spaces and reclaim historical landscapes.</p>
+          
+          <p>This GIS mapping project explores the geographical references in Constantine Cavafy's poetry, examining how the poet's Alexandria exists both as a historical place and a literary landscape. Through digital mapping techniques and geographical analysis, the project visualizes the spatial dimensions of Cavafy's work and the relationship between place and poetry.</p>
+          
+          <p>The project combines literary analysis with GIS technology to create interactive maps that reveal the geographical patterns in Cavafy's poetry, offering new insights into how place functions in his literary imagination.</p>
+        </div>
+        
+        <p><em>Interactive web link to the project will be shared soon.</em></p>
+      </div>
+
+      <div class="downloads">
+        <a href="mailto:burcak.bayram.23@alumni.ucl.ac.uk?subject=Thesis Request - Mapping Constantine Cavafy's Alexandria" class="download-btn">
+          📄 Thesis upon request
+        </a>
+        <a href="https://www.youtube.com/watch?v=LebwlsTh1vM" target="_blank" class="download-btn secondary">
+          🎥 Watch QGIS Process
+        </a>
+      </div>
+
+      <div style="margin: 15mm 0; text-align: center;">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/LebwlsTh1vM?si=U6S0C4e7GHog2-Gl&start=3" title="Mapping Constantine Cavafy's Alexandria - QGIS Process" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="border: 0.5pt solid #ddd; border-radius: 5px;"></iframe>
+        <p style="font-style: italic; color: #666; font-size: 10pt; margin-top: 3mm;">QGIS mapping process demonstration</p>
+      </div>
+    </div>
+
+    <!-- London Data Week Detail Page -->
+    <div id="ldw-detail" class="project-detail">
+      <a href="#" onclick="showMain()" class="back-link">← Back to Portfolio</a>
+      
+      <h1 style="font-size: 14pt;">🏛️ 🔐 London Data Week 2024 — Civic Data & Cybersecurity Workshop</h1>
+      
+      <div class="project-description">
+        <p>As part of London Data Week 2024, I co-organized a public workshop and mini-hackathon at Goodenough College London in collaboration with a member of the Coding Collective, a beginner-friendly initiative I founded to promote inclusive, community-driven tech learning. The event focused on mapping and visualizing open-source datasets from the City of London, inviting around 15 attendees to engage in hands-on exploration of civic data.</p>
+        
+        <p>The workshop was preceded by a guest talk on cybersecurity by Dr. Vasilios Mavroudis, co-leader of the AI for Cyber Defence (AICD) Research Center at the Alan Turing Institute. A leading expert in AI and cybersecurity, Dr. Mavroudis discussed advances in AI-driven security, privacy-preserving technologies, and the future of digital defense.</p>
+        
+        <p>We are currently preparing a follow-up event for London Data Week 2025, centered around collaborative civic mapping. Details will be announced soon.</p>
+        
+        <p>📚 One of the attendees created a GitHub repository summarizing the event's outcomes and materials — check it out here! 
+        🔗 <a href="https://github.com/kamalshashwat/London-Data-Week" target="_blank" style="color: #3366cc; text-decoration: underline;">https://github.com/kamalshashwat/London-Data-Week</a></p>
+      </div>
+
+      <div style="margin: 15mm 0; text-align: center;">
+        <img src="LDW_GC.jpeg" alt="London Data Week 2024 Workshop at Goodenough College" style="max-width: 50%; height: auto; border: 0.5pt solid #ddd; border-radius: 5px;">
+        <p style="font-style: italic; color: #666; font-size: 10pt; margin-top: 3mm;">London Data Week 2024 Workshop at Goodenough College London</p>
+      </div>
+
+      <!-- Vertical photos row -->
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 5mm; margin: 10mm 0;">
+        <div style="text-align: center;">
+          <img src="ldw1.jpeg" alt="London Data Week Event Photo 1" style="width: 100%; height: auto; border: 0.5pt solid #ddd; border-radius: 5px; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.2)'; this.style.borderColor='#e25d44'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.2)'; this.style.zIndex='100'; this.style.position='relative';" onmouseout="this.style.transform='scale(1)'; this.style.borderColor='#ddd'; this.style.boxShadow='none'; this.style.zIndex='auto'; this.style.position='static';" onclick="openImageModal(this.src, this.alt)">
+        </div>
+        <div style="text-align: center;">
+          <img src="ldw2.jpeg" alt="London Data Week Event Photo 2" style="width: 100%; height: auto; border: 0.5pt solid #ddd; border-radius: 5px; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.2)'; this.style.borderColor='#e25d44'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.2)'; this.style.zIndex='100'; this.style.position='relative';" onmouseout="this.style.transform='scale(1)'; this.style.borderColor='#ddd'; this.style.boxShadow='none'; this.style.zIndex='auto'; this.style.position='static';" onclick="openImageModal(this.src, this.alt)">
+        </div>
+        <div style="text-align: center;">
+          <img src="ldw3.jpeg" alt="London Data Week Event Photo 3" style="width: 100%; height: auto; border: 0.5pt solid #ddd; border-radius: 5px; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.2)'; this.style.borderColor='#e25d44'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.2)'; this.style.zIndex='100'; this.style.position='relative';" onmouseout="this.style.transform='scale(1)'; this.style.borderColor='#ddd'; this.style.boxShadow='none'; this.style.zIndex='auto'; this.style.position='static';" onclick="openImageModal(this.src, this.alt)">
+        </div>
+        <div style="text-align: center;">
+          <img src="ldw4.jpeg" alt="London Data Week Event Photo 4" style="width: 100%; height: auto; border: 0.5pt solid #ddd; border-radius: 5px; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.2)'; this.style.borderColor='#e25d44'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.2)'; this.style.zIndex='100'; this.style.position='relative';" onmouseout="this.style.transform='scale(1)'; this.style.borderColor='#ddd'; this.style.boxShadow='none'; this.style.zIndex='auto'; this.style.position='static';" onclick="openImageModal(this.src, this.alt)">
+        </div>
+      </div>
+
+      <!-- Horizontal photos row -->
+      <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 5mm; margin: 10mm 0;">
+        <div style="text-align: center;">
+          <img src="ldw5.jpeg" alt="London Data Week Event Photo 5" style="width: 100%; height: auto; border: 0.5pt solid #ddd; border-radius: 5px; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.2)'; this.style.borderColor='#e25d44'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.2)'; this.style.zIndex='100'; this.style.position='relative';" onmouseout="this.style.transform='scale(1)'; this.style.borderColor='#ddd'; this.style.boxShadow='none'; this.style.zIndex='auto'; this.style.position='static';" onclick="openImageModal(this.src, this.alt)">
+        </div>
+        <div style="text-align: center;">
+          <img src="ldw6.jpeg" alt="London Data Week Event Photo 6" style="width: 100%; height: auto; border: 0.5pt solid #ddd; border-radius: 5px; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.2)'; this.style.borderColor='#e25d44'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.2)'; this.style.zIndex='100'; this.style.position='relative';" onmouseout="this.style.transform='scale(1)'; this.style.borderColor='#ddd'; this.style.boxShadow='none'; this.style.zIndex='auto'; this.style.position='static';" onclick="openImageModal(this.src, this.alt)">
+        </div>
+        <div style="text-align: center;">
+          <img src="ldw7.jpeg" alt="London Data Week Event Photo 7" style="width: 100%; height: auto; border: 0.5pt solid #ddd; border-radius: 5px; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.2)'; this.style.borderColor='#e25d44'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.2)'; this.style.zIndex='100'; this.style.position='relative';" onmouseout="this.style.transform='scale(1)'; this.style.borderColor='#ddd'; this.style.boxShadow='none'; this.style.zIndex='auto'; this.style.position='static';" onclick="openImageModal(this.src, this.alt)">
+        </div>
+        <div style="text-align: center;">
+          <img src="ldw8.jpeg" alt="London Data Week Event Photo 8" style="width: 100%; height: auto; border: 0.5pt solid #ddd; border-radius: 5px; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.2)'; this.style.borderColor='#e25d44'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.2)'; this.style.zIndex='100'; this.style.position='relative';" onmouseout="this.style.transform='scale(1)'; this.style.borderColor='#ddd'; this.style.boxShadow='none'; this.style.zIndex='auto'; this.style.position='static';" onclick="openImageModal(this.src, this.alt)">
+        </div>
+        <div style="text-align: center;">
+          <img src="ldw9.jpeg" alt="London Data Week Event Photo 9" style="width: 100%; height: auto; border: 0.5pt solid #ddd; border-radius: 5px; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.2)'; this.style.borderColor='#e25d44'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.2)'; this.style.zIndex='100'; this.style.position='relative';" onmouseout="this.style.transform='scale(1)'; this.style.borderColor='#ddd'; this.style.boxShadow='none'; this.style.zIndex='auto'; this.position='static';" onclick="openImageModal(this.src, this.alt)">
+        </div>
+      </div>
+
+      <p style="font-style: italic; color: #666; font-size: 10pt; margin-top: 5mm; text-align: center;">Event photos from London Data Week 2024 workshop</p>
+    </div>
+  </div>
+
+  <!-- Image Modal -->
+  <div id="imageModal" class="image-modal" onclick="closeImageModal()">
+    <span class="close-modal" onclick="closeImageModal()">&times;</span>
+    <img class="modal-content" id="modalImage">
+  </div>
+
+  <script>
+    function showNLPDetail() {
+      hideAllPages();
+      document.getElementById('nlp-detail').style.display = 'block';
+    }
+
+    function showMatryoshkaDetail() {
+      hideAllPages();
+      document.getElementById('matryoshka-detail').style.display = 'block';
+    }
+
+    function showKaskieDetail() {
+      hideAllPages();
+      document.getElementById('kaskie-detail').style.display = 'block';
+    }
+
+    function showBenthamDetail() {
+      hideAllPages();
+      document.getElementById('bentham-detail').style.display = 'block';
+    }
+
+    function showBluePlaquesDetail() {
+      hideAllPages();
+      document.getElementById('blue-plaques-detail').style.display = 'block';
+    }
+
+    function showCavafyDetail() {
+      hideAllPages();
+      document.getElementById('cavafy-detail').style.display = 'block';
+    }
+
+    function showLDWDetail() {
+      hideAllPages();
+      document.getElementById('ldw-detail').style.display = 'block';
+    }
+
+    function showMain() {
+      hideAllPages();
+      document.getElementById('main-content').style.display = 'block';
+    }
+
+    function hideAllPages() {
+      document.getElementById('main-content').style.display = 'none';
+      document.getElementById('nlp-detail').style.display = 'none';
+      document.getElementById('matryoshka-detail').style.display = 'none';
+      document.getElementById('kaskie-detail').style.display = 'none';
+      document.getElementById('bentham-detail').style.display = 'none';
+      document.getElementById('blue-plaques-detail').style.display = 'none';
+      document.getElementById('cavafy-detail').style.display = 'none';
+      document.getElementById('ldw-detail').style.display = 'none';
+    }
+
+    function openImageModal(src, alt) {
+      const modal = document.getElementById('imageModal');
+      const modalImage = document.getElementById('modalImage');
+      modal.style.display = 'flex';
+      modalImage.src = src;
+      modalImage.alt = alt;
+    }
+
+    function closeImageModal() {
+      const modal = document.getElementById('imageModal');
+      modal.style.display = 'none';
+    }
+
+    // Close modal when pressing Escape key
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        closeImageModal();
+      }
+    });
+  </script>
+</body>
+</html>
